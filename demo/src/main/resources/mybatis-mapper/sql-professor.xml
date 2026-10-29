@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.ProfessorMapper">
+	<select id="selectProfessorList" parameterType="hashmap" resultType="com.example.demo.model.Professor">
+		SELECT *
+		FROM PROFESSOR
+	</select>
+	
+	<select id="selectProfessor" parameterType="hashmap" resultType="com.example.demo.model.Professor">
+		SELECT *
+		FROM PROFESSOR WHERE PROFNO = #{profNo}
+	</select>
+	
+	<delete id="deleteProfessor" parameterType="hashmap">
+		DELETE FROM PROFESSOR WHERE PROFNO = #{profNo}
+	</delete>
+	
+	<insert id="insertProfessor" parameterType="hashmap">
+		INSERT INTO PROFESSOR(PROFNO, NAME, POSITION, PAY, DEPTNO)
+		VALUES(#{profNo}, #{name}, #{position}, #{pay}, #{deptNo}) 
+	</insert>
+	
+	
+	<!-- DEPARTMENT -->
+	<select id="selectDeptList" parameterType="hashmap" resultType="com.example.demo.model.Professor">
+		SELECT * 
+		FROM DEPARTMENT
+		WHERE DNAME LIKE '%학과'
+	</select>
+</mapper>
+
+
+
+
+
