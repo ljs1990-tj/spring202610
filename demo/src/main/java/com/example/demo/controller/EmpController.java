@@ -24,6 +24,12 @@ public class EmpController {
 		return "/emp/list";
 	}
 	
+	@RequestMapping("/emp/add.do")
+	public String add(Model model) throws Exception{
+		
+		return "/emp/add";
+	}
+	
 	@RequestMapping(value = "/emp/list.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String login(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
@@ -40,6 +46,16 @@ public class EmpController {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
 		resultMap = empService.removeEmp(map);
+		
+		return new Gson().toJson(resultMap); 
+	}
+	
+	@RequestMapping(value = "/emp/add.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String add(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = empService.addEmp(map);
 		
 		return new Gson().toJson(resultMap); 
 	}

@@ -12,7 +12,10 @@
 		DELETE FROM EMP WHERE EMPNO = #{empNo}
 	</delete>
 
-	
+	<insert id="insertEmp" parameterType="hashmap">
+		INSERT INTO EMP(EMPNO, ENAME, JOB, SAL)
+		VALUES(#{empNo}, #{eName}, #{job}, #{sal})
+	</insert>
 </mapper>
 
 

@@ -13,6 +13,8 @@ public interface EmpMapper {
 	List<Emp> selectEmpList(HashMap<String, Object> map);
 	// 사원 삭제
 	int deleteEmp(HashMap<String, Object> map);
+	// 사원 추가
+	void insertEmp(HashMap<String, Object> map);
 }
 
 

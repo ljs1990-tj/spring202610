@@ -32,6 +32,20 @@ public class EmpService {
 		
 		return resultMap;
 	}
+
+	public HashMap<String, Object> addEmp(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap();
+		try {
+			empMapper.insertEmp(map);
+			resultMap.put("result", "success");
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultMap.put("result", "fail");
+			System.err.println(e.getMessage());
+		}
+		return resultMap;
+	}
 	
 }
 
