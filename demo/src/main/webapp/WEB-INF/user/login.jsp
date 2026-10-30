@@ -64,16 +64,10 @@
                     type: "POST",
                     data: param,
                     success: function (data) {
-                        if(data.result == "success"){
-                            if(data.loginFlg){
-                                alert("로그인 성공");
-                                location.href="/professor/list.do";
-                            } else {
-                                alert("로그인 실패");
-                            }
-                        } else {
-                            alert("에러가 발생!");
-                        }
+                        alert(data.message);
+                        if(data.loginFlg){
+                            location.href="/professor/list.do";
+                        } 
                     }
                 });
             }

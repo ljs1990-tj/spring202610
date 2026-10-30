@@ -17,8 +17,9 @@ public class EmpService {
 	public HashMap<String, Object> getEmpList(HashMap<String, Object> map){
 		HashMap<String, Object> resultMap = new HashMap();
 		List<Emp> list =  empMapper.selectEmpList(map);
-		
+		List<Emp> gradeList =  empMapper.selectGradeList(map);
 		resultMap.put("list", list);
+		resultMap.put("gradeList", gradeList);
 		resultMap.put("result", "success");
 		
 		return resultMap;

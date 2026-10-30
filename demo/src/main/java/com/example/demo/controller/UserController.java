@@ -24,6 +24,12 @@ public class UserController {
 		return "/user/login";
 	}
 	
+	@RequestMapping("/join.do")
+	public String join(Model model) throws Exception{
+		
+		return "/user/join";
+	}
+	
 	@RequestMapping(value = "/login.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String login(Model model, @RequestParam HashMap<String, Object> map) throws Exception {

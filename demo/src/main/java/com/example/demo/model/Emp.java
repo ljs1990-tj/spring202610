@@ -5,4 +5,5 @@ public class Emp {
 	private String eName;
 	private String job;
 	private String sal;
+	private String grade;
 }
