@@ -28,6 +28,10 @@
     <div id="app">
         <!-- html 코드는 id가 app인 태그 안에서 작업 -->
         <div>
+            검색어 : <input v-model="keyword" @keyup.enter="fnList"> 
+            <button @click="fnList">검색</button>
+        </div>
+        <div>
 			<table>
 				<tr>
 					<th>번호</th>
@@ -59,14 +63,17 @@
         data() {
             return {
                 // 변수 - (key : value)
-                list : []
+                list : [],
+                keyword : ""
             };
         },
         methods: {
             // 함수(메소드) - (key : function())
             fnList : function () {
                 let self = this;
-                let param = {};
+                let param = {
+                    keyword : self.keyword
+                };
                 $.ajax({
                     url: "http://localhost:8080/professor/list.dox",
                     dataType: "json",

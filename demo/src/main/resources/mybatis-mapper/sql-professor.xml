@@ -6,6 +6,7 @@
 	<select id="selectProfessorList" parameterType="hashmap" resultType="com.example.demo.model.Professor">
 		SELECT *
 		FROM PROFESSOR
+		WHERE NAME LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 	
 	<select id="selectProfessor" parameterType="hashmap" resultType="com.example.demo.model.Professor">
