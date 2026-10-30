@@ -59,4 +59,14 @@ public class EmpController {
 		
 		return new Gson().toJson(resultMap); 
 	}
+	
+	@RequestMapping(value = "/emp/info.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String info(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = empService.getEmp(map);
+		
+		return new Gson().toJson(resultMap); 
+	}
 }

@@ -29,6 +29,14 @@ public class ProfessorController {
 		
 		return "/professor/add";
 	}
+	// 상세 보기
+	@RequestMapping("/professor/view.do")
+	public String view(Model model, @RequestParam HashMap<String, Object> map) throws Exception{
+		System.out.println(map);
+		model.addAttribute("profNo", map.get("profNo"));
+		
+		return "/professor/view";
+	}
 	
 	@RequestMapping(value = "/professor/list.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody

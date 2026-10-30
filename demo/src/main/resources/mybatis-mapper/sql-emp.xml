@@ -8,6 +8,12 @@
 		FROM EMP
 	</select>
 	
+	<select id="selectEmp" parameterType="hashmap" resultType="com.example.demo.model.Emp">
+		SELECT *
+		FROM EMP
+		WHERE EMPNO = #{empNo}
+	</select>
+	
 	<delete id="deleteEmp" parameterType="hashmap">
 		DELETE FROM EMP WHERE EMPNO = #{empNo}
 	</delete>

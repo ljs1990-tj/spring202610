@@ -15,6 +15,8 @@ public interface EmpMapper {
 	int deleteEmp(HashMap<String, Object> map);
 	// 사원 추가
 	void insertEmp(HashMap<String, Object> map);
+	// 사원 조회
+	Emp selectEmp(HashMap<String, Object> map);
 }
 
 

@@ -43,7 +43,9 @@
 				</tr>
 				<tr v-for="item in list">
 					<td>{{item.profNo}}</td>
-					<td>{{item.name}}</td>
+					<td>
+                        <a href="javascript:;" @click="fnView(item.profNo)">{{item.name}}</a>
+                    </td>
 					<td>{{item.position}}</td>
                     <td>{{item.pay}}</td>
 					<td>{{item.email}}</td>
@@ -101,6 +103,10 @@
 						
 				    }
 				});
+            },
+            fnView : function(profNo){
+                // view.do 페이지 이동
+                pageChange("view.do", {profNo : profNo});
             }
         }, // methods
         mounted() {

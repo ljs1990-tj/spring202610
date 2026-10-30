@@ -31,7 +31,7 @@
         <hr>
         <div>
             <label>사번 : <input v-model="empNo"></label>
-            <button>중복체크</button>
+            <button @click="fnCheck">중복체크</button>
         </div>
         <div>
             <label>이름 : <input v-model="eName"></label>
@@ -79,6 +79,29 @@
                         if(data.result == "success"){
                             alert("추가되었습니다!");
                             location.href="list.do";
+                        } else {
+                            alert("오류가 발생했습니다. \n나중에 다시 시도해주세요.");
+                        }
+                    }
+                });
+            },
+            fnCheck : function () {
+                let self = this;
+                let param = {
+                    empNo : self.empNo
+                };
+                $.ajax({
+                    url: "http://localhost:8080/emp/info.dox",
+                    dataType: "json",
+                    type: "POST",
+                    data: param,
+                    success: function (data) {
+                        if(data.result == "success"){
+                            if(data.info == null || data.info == undefined){
+                                alert("사용 가능한 사번");
+                            } else {
+                                alert("이미 사용중인 사번");
+                            }
                         } else {
                             alert("오류가 발생했습니다. \n나중에 다시 시도해주세요.");
                         }
