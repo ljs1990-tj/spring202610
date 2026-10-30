@@ -23,6 +23,13 @@
 		VALUES(#{profNo}, #{name}, #{position}, #{pay}, #{deptNo}) 
 	</insert>
 	
+	<update	id="updateProfessor" parameterType="hashmap">
+		UPDATE PROFESSOR SET
+			NAME = #{name},
+			POSITION = #{position},
+			PAY = #{pay}
+		WHERE PROFNO = #{profNo}
+	</update>
 	
 	<!-- DEPARTMENT -->
 	<select id="selectDeptList" parameterType="hashmap" resultType="com.example.demo.model.Professor">

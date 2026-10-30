@@ -31,7 +31,7 @@
         <div>이름 : {{info.name}}</div>
         <hr>
         <button @click="fnRemove">삭제</button>
-        <button>수정</button>
+        <button @click="fnEdit">수정</button>
     </div>
 </body>
 </html>
@@ -78,6 +78,10 @@
                         location.href="list.do";
                     }
                 });
+            },
+            fnEdit : function(){
+                let self = this;
+                pageChange("edit.do", {profNo : self.profNo});
             }
         }, // methods
         mounted() {
