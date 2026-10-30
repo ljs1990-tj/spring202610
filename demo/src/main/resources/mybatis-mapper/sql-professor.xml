@@ -5,8 +5,12 @@
 <mapper namespace="com.example.demo.mapper.ProfessorMapper">
 	<select id="selectProfessorList" parameterType="hashmap" resultType="com.example.demo.model.Professor">
 		SELECT *
-		FROM PROFESSOR
+		FROM PROFESSOR P
+		INNER JOIN DEPARTMENT D ON P.DEPTNO = D.DEPTNO
 		WHERE NAME LIKE CONCAT('%', #{keyword}, '%')
+		<if test="deptNo != null and deptNo != ''">
+			AND P.DEPTNO = #{deptNo}
+		</if>
 	</select>
 	
 	<select id="selectProfessor" parameterType="hashmap" resultType="com.example.demo.model.Professor">

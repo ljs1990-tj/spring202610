@@ -85,6 +85,17 @@ public class ProfessorController {
 		return new Gson().toJson(resultMap); 
 	}
 	
+		@RequestMapping(value = "/professor/edit.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String edit_(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = professorService.editProfessor(map);
+		
+		return new Gson().toJson(resultMap); 
+	}
+		
+	// Department		
 	@RequestMapping(value = "/professor/dept-list.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String deptList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
@@ -94,15 +105,6 @@ public class ProfessorController {
 		
 		return new Gson().toJson(resultMap); 
 	}
-	
-	@RequestMapping(value = "/professor/edit.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String edit_(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
-		resultMap = professorService.editProfessor(map);
-		
-		return new Gson().toJson(resultMap); 
-	}
 	
 }

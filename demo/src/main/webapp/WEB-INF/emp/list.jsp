@@ -38,7 +38,9 @@
                 </tr>
                 <tr v-for="item in list">
                     <td>{{item.empNo}}</td>
-                    <td>{{item.eName}}</td>
+                    <td>
+                        <a href="javascript:;" @click="fnView(item.empNo)">{{item.eName}}</a>
+                    </td>
                     <td>{{item.job}}</td>
                     <td>{{item.sal}}</td>
                     <td><button @click="fnRemove(item.empNo)">삭제</button></td>
@@ -87,6 +89,9 @@
                         self.fnList();
                     }
                 });
+            },
+            fnView : function(empNo){
+                pageChange("view.do", {empNo : empNo});
             }
         }, // methods
         mounted() {

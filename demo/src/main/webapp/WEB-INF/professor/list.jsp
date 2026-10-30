@@ -31,6 +31,15 @@
             검색어 : <input v-model="keyword" @keyup.enter="fnList"> 
             <button @click="fnList">검색</button>
         </div>
+        <div>학과 : 
+            <select v-model="deptNo" @change="fnList">
+                <option value="">:: 선택 ::</option>
+                <option v-for="item in deptList" :value="item.deptNo">{{item.dName}}</option>
+            </select>
+            || 
+            직급 : 
+        </div>
+        <hr>
         <div>
 			<table>
 				<tr>
@@ -39,6 +48,7 @@
 					<th>직급</th>
                     <th>급여</th>
 					<th>이메일</th>
+                    <th>학과</th>
                     <th>삭제</th>
 				</tr>
 				<tr v-for="item in list">
@@ -49,6 +59,7 @@
 					<td>{{item.position}}</td>
                     <td>{{item.pay}}</td>
 					<td>{{item.email}}</td>
+                    <td>{{item.dName}}</td>
                     <td><button @click="fnRemove(item.profNo)">삭제</button></td>
 				</tr>
 			</table>
@@ -66,7 +77,9 @@
             return {
                 // 변수 - (key : value)
                 list : [],
-                keyword : ""
+                keyword : "",
+                deptList : [],
+                deptNo : ""
             };
         },
         methods: {
@@ -74,7 +87,8 @@
             fnList : function () {
                 let self = this;
                 let param = {
-                    keyword : self.keyword
+                    keyword : self.keyword,
+                    deptNo : self.deptNo
                 };
                 $.ajax({
                     url: "http://localhost:8080/professor/list.dox",
@@ -84,6 +98,7 @@
                     success: function (data) {
                         console.log(data);
                         self.list = data.list;
+                        self.deptList = data.deptList;
                     }
                 });
             },

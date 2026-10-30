@@ -30,6 +30,13 @@ public class EmpController {
 		return "/emp/add";
 	}
 	
+	@RequestMapping("/emp/view.do")
+	public String view(Model model, @RequestParam HashMap<String, Object> map) throws Exception{
+		model.addAttribute("empNo", map.get("empNo"));
+		
+		return "/emp/view";
+	}
+	
 	@RequestMapping(value = "/emp/list.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String login(Model model, @RequestParam HashMap<String, Object> map) throws Exception {

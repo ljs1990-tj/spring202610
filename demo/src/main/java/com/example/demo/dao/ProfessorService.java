@@ -17,8 +17,10 @@ public class ProfessorService {
 	public HashMap<String, Object> getProfessorList(HashMap<String, Object> map){
 		HashMap<String, Object> resultMap = new HashMap();
 		List<Professor> list =  professorMapper.selectProfessorList(map);
+		List<Professor> deptList = professorMapper.selectDeptList(map);
 		
 		resultMap.put("list", list);
+		resultMap.put("deptList", deptList);
 		resultMap.put("result", "success");
 		
 		return resultMap;
