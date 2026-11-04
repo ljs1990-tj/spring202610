@@ -151,18 +151,17 @@
             },
             fnSelectItem : function(){
                 let self = this;
-                self.selectFlg = !self.selectFlg;
-                if(self.selectFlg){
+                self.selectItemList = [];
+                
+                if(!self.checked){
                     self.list.forEach(map => {
                         self.selectItemList.push(map.boardNo);
                     });
-                } else {
-                    self.selectItemList = [];
-                }
+                } 
             },
             fnSelect : function(){
                 let self = this;
-                self.checked = self.list.lenght == self.selectItemList.lenght;
+                self.checked = self.list.length == self.selectItemList.length;
             }
         }, // methods
         mounted() {
