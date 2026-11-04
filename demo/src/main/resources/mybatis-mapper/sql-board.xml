@@ -4,4 +4,24 @@
 
 <mapper namespace="com.example.demo.mapper.BoardMapper">
 
+	<select id="selectBoardList" parameterType="hashmap" resultType="com.example.demo.model.Board">
+		SELECT *
+		FROM TBL_BOARD
+	</select>
+	
+	<delete id="deleteBoard" parameterType="hashmap">
+		DELETE FROM TBL_BOARD WHERE BOARDNO = #{boardNo}
+	</delete>
+	
+	<delete id="deleteBoardAll" parameterType="hashmap">
+		DELETE FROM TBL_BOARD 
+		WHERE BOARDNO IN 
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		
+	</delete>
+	
 </mapper>
+
+
