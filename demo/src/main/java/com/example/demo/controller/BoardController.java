@@ -58,7 +58,7 @@ public class BoardController {
 		map.put("list", list);
 		System.out.println(map);
 		
-//		resultMap = boardService.removeBoard(map);
+		resultMap = boardService.removeBoardAll(map);
 		
 		return new Gson().toJson(resultMap); 
 	}

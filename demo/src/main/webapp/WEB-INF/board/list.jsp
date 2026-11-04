@@ -40,7 +40,7 @@
             <table>
                 <tr>
                     <!-- <th>선택  </th> -->
-                    <th></th> 
+                    <th><input type="checkbox" @click="fnSelectItem" value="true" v-model="checked"></th> 
                     <th>번호  </th>
                     <th>제목  </th>
                     <th>아이디</th>
@@ -49,7 +49,7 @@
                 </tr>
                 <tr v-for="item in list">
                     <!-- <td><input type="radio" name="board" :value="item.boardNo" v-model="selectItem"></td> -->
-                    <td><input type="checkbox" name="board" :value="item.boardNo" v-model="selectItemList"></td>
+                    <td><input @change="fnSelect" type="checkbox" name="board" :value="item.boardNo" v-model="selectItemList"></td>
                     <td>{{item.boardNo}}</td>
                     <td>{{item.title}}</td>
                     <td>{{item.userId}}</td>
@@ -73,7 +73,10 @@
                 // 변수 - (key : value)
                 list : [],
                 selectItem : "", // 라디오 버튼으로 삭제 할 때
-                selectItemList : [] // 체크박스로 삭제할 때
+                selectItemList : [], // 체크박스로 삭제할 때
+                selectFlg : false,
+
+                checked : false
             };
         },
         methods: {
@@ -140,11 +143,26 @@
                     type: "POST",
                     data: param,
                     success: function (data) {
-                        // alert(data.message);
-                        // self.fnList();
-                        // self.selectItemList = [];
+                        alert(data.message);
+                        self.fnList();
+                        self.selectItemList = [];
                     }
                 });
+            },
+            fnSelectItem : function(){
+                let self = this;
+                self.selectFlg = !self.selectFlg;
+                if(self.selectFlg){
+                    self.list.forEach(map => {
+                        self.selectItemList.push(map.boardNo);
+                    });
+                } else {
+                    self.selectItemList = [];
+                }
+            },
+            fnSelect : function(){
+                let self = this;
+                self.checked = self.list.lenght == self.selectItemList.lenght;
             }
         }, // methods
         mounted() {

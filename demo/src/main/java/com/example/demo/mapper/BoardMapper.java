@@ -14,6 +14,9 @@ public interface BoardMapper {
 	
 	// 게시글 삭제
 	int deleteBoard(HashMap<String, Object> map);
+	
+	// 게시글 여러개 삭제
+	int deleteBoardAll(HashMap<String, Object> map);
 }
 
 
