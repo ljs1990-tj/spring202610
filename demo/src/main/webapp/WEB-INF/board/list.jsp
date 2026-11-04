@@ -14,6 +14,7 @@
         #app {
             width : 800px;
             margin : 30px auto;
+            margin-bottom: 300px;
         }
         table {
             width: 750px;
@@ -31,6 +32,19 @@
         tr:nth-child(even){
             background-color: azure;
         }
+        #paging {
+            text-align: center;
+        }
+        #paging a {
+            margin-right: 6px;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        #paging .active {
+            font-weight: bold;
+            color : black;
+        }
+
     </style>
 </head>
 <body>
@@ -58,6 +72,9 @@
                 </tr>
             </table>
         </div>
+        <div id="paging">
+            <a @click="currentPage = item; fnList();" :class="{active : currentPage == item}" href="javascript:;" v-for="item in idx">{{item}}</a>
+        </div>
         <div>
             <!-- <button @click="fnRemove">삭제</button> -->
             <button @click="fnRemoveAll">삭제</button>
@@ -76,14 +93,21 @@
                 selectItemList : [], // 체크박스로 삭제할 때
                 selectFlg : false,
 
-                checked : false
+                checked : false,
+
+                idx : 1, // 페이징 갯수(최대 페이지 수)
+                pageSize : 5, // 한페이지에 출력할 개수
+                currentPage : 1, // 현재 페이지
             };
         },
         methods: {
             // 함수(메소드) - (key : function())
             fnList : function () {
                 let self = this;
-                let param = {};
+                let param = {
+                    limit : self.pageSize,
+                    offset : self.pageSize * (self.currentPage - 1)
+                };
                 $.ajax({
                     url: "http://localhost:8080/board/list.dox",
                     dataType: "json",
@@ -92,7 +116,7 @@
                     success: function (data) {
                         console.log(data);
                         self.list = data.list;
-
+                        self.idx = Math.ceil( data.count / self.pageSize );
                     }
                 });
             },
@@ -146,13 +170,14 @@
                         alert(data.message);
                         self.fnList();
                         self.selectItemList = [];
+                        self.checked = false;
                     }
                 });
             },
             fnSelectItem : function(){
                 let self = this;
                 self.selectItemList = [];
-                
+
                 if(!self.checked){
                     self.list.forEach(map => {
                         self.selectItemList.push(map.boardNo);

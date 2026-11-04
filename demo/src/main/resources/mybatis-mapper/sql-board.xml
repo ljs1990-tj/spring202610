@@ -7,6 +7,12 @@
 	<select id="selectBoardList" parameterType="hashmap" resultType="com.example.demo.model.Board">
 		SELECT *
 		FROM TBL_BOARD
+		LIMIT #{limit} OFFSET #{offset}
+	</select>
+	
+	<select id="selectBoardCount" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*)
+		FROM TBL_BOARD
 	</select>
 	
 	<delete id="deleteBoard" parameterType="hashmap">
@@ -19,7 +25,6 @@
 		<foreach collection="list" item="item" open="(" separator="," close=")">
 			#{item}
 		</foreach>
-		
 	</delete>
 	
 </mapper>

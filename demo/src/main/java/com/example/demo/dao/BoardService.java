@@ -18,8 +18,18 @@ public class BoardService {
 	public HashMap<String, Object> getBoardList(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap();
 		try {
+			// object -> 문자열 -> 숫자
+			String limit = (String) map.get("limit");
+			String offset = (String) map.get("offset");
+			
+			map.put("limit", Integer.parseInt(limit));
+			map.put("offset", Integer.parseInt(offset));
+			
 			List<Board> list = boardMapper.selectBoardList(map);
+			int count = boardMapper.selectBoardCount(map);
+			
 			resultMap.put("list", list);
+			resultMap.put("count", count);
 			resultMap.put("result", "success");
 		} catch (Exception e) {
 			// TODO: handle exception
