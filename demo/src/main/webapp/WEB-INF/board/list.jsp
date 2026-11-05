@@ -44,13 +44,33 @@
             font-weight: bold;
             color : black;
         }
-
+        .table select {
+            margin-bottom : 10px;
+            width: 80px;
+            text-align: center;
+        }
+        .search {
+            text-align: center;
+        }
+        .search input {
+            height: 25px;
+        }
     </style>
 </head>
 <body>
     <div id="app">
         <!-- html 코드는 id가 app인 태그 안에서 작업 -->
-        <div>
+        <div class="table">
+            <div class="search">
+                검색어 : <input @keyup.enter="fnList" v-model="keyword" placeholder="검색어를 입력해주세요.">
+                        <button @click="fnList">검색</button>
+            </div>
+            <select v-model="pageSize" @change="fnList">
+                <option value="5">5개씩</option>
+                <option value="10">10개씩</option>
+                <option value="15">15개씩</option>
+                <option value="20">20개씩</option>
+            </select>
             <table>
                 <tr>
                     <!-- <th>선택  </th> -->
@@ -73,7 +93,9 @@
             </table>
         </div>
         <div id="paging">
+            <a href="javascript:;" v-if="currentPage != 1" @click="currentPage--; fnList();">◀</a>
             <a @click="currentPage = item; fnList();" :class="{active : currentPage == item}" href="javascript:;" v-for="item in idx">{{item}}</a>
+            <a href="javascript:;" v-if="currentPage != idx" @click="currentPage++; fnList();">▶</a>
         </div>
         <div>
             <!-- <button @click="fnRemove">삭제</button> -->
@@ -94,6 +116,7 @@
                 selectFlg : false,
 
                 checked : false,
+                keyword : "", // 검색어
 
                 idx : 1, // 페이징 갯수(최대 페이지 수)
                 pageSize : 5, // 한페이지에 출력할 개수
@@ -105,6 +128,7 @@
             fnList : function () {
                 let self = this;
                 let param = {
+                    keyword : self.keyword,
                     limit : self.pageSize,
                     offset : self.pageSize * (self.currentPage - 1)
                 };
