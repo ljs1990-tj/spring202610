@@ -99,6 +99,7 @@
         </div>
         <div>
             <!-- <button @click="fnRemove">삭제</button> -->
+            <a href="add.do"><button>글쓰기</button></a>
             <button @click="fnRemoveAll">삭제</button>
         </div>
     </div>

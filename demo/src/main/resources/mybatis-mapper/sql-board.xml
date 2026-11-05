@@ -29,6 +29,16 @@
 		</foreach>
 	</delete>
 	
+	<insert id="insertBoard" parameterType="hashmap">
+		INSERT INTO TBL_BOARD
+		VALUES(NULL, #{title}, #{contents}, 'user01', 0, #{kind}, NOW(), NOW())
+		<!-- userId는 잠깐 하드코딩. 아직 세션 안해서 -->
+	</insert>
+	
 </mapper>
+
+
+
+
 
 

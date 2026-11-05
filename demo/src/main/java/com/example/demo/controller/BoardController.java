@@ -27,6 +27,11 @@ public class BoardController {
 		return "/board/list";
 	}
 		
+	@RequestMapping("/board/add.do")
+	public String add(Model model) throws Exception{
+		
+		return "/board/add";
+	}
 	
 	@RequestMapping(value = "/board/list.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
