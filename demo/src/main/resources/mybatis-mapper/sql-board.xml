@@ -41,6 +41,14 @@
 		<!-- userId는 잠깐 하드코딩. 아직 세션 안해서 -->
 	</insert>
 	
+	<update id="updateBoard" parameterType="hashmap">
+		UPDATE TBL_BOARD SET
+			TITLE = #{title},
+			CONTENTS = #{contents},
+			KIND = #{kind},
+			UDATETIME = NOW()
+		WHERE BOARDNO = #{boardNo}
+	</update>
 </mapper>
 
 

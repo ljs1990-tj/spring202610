@@ -100,7 +100,7 @@
                 </tr>
             </table>
             <div class="btn-area">
-                <button @click="">등록</button>
+                <button @click="fnEdit">수정</button>
                 <button>되돌아가기</button>
             </div>
         </div>
@@ -139,6 +139,26 @@
                     }
                 });
             },
+            fnEdit : function () {
+                let self = this;
+                let param = {
+                    boardNo : self.boardNo,
+                    kind : self.kind,
+                    title : self.title,
+                    contents : self.contents
+                };
+                $.ajax({
+                    url: "edit.dox",
+                    dataType: "json",
+                    type: "POST",
+                    data: param,
+                    success: function (data) {
+                        alert("수정 됨!");
+                        location.href="list.do";
+                    }
+                });
+            },
+
             fnEditor : function (){
                 let self = this;
                 // Quill 에디터 초기화

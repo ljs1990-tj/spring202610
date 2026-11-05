@@ -41,6 +41,7 @@
         </div>
         <div>
             주소 : <input v-model="addr">
+            <button @click="fnAddr">주소검색</button>
         </div>
         <div>
             <button @click="fnJoin">가입하기</button>
@@ -50,6 +51,13 @@
 </html>
 
 <script>
+    function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+        console.log("roadFullAddr ==> ", roadFullAddr);
+        console.log("engAddr ==> ", engAddr);
+        console.log("jibunAddr ==> ", jibunAddr);
+        window.vueObj.addr = roadFullAddr;
+    }
+
     const app = Vue.createApp({
         data() {
             return {
@@ -111,14 +119,18 @@
                     type: "POST",
                     data: param,
                     success: function (data) {
-
+                        
                     }
                 });
+            },
+            fnAddr : function (){
+                window.open("addr.do", "addr", "width=500, height=500");
             }
         }, // methods
         mounted() {
             // 처음 시작할 때 실행되는 부분
             let self = this;
+            window.vueObj = this;
         }
     });
 

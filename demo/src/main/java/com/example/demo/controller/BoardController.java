@@ -57,6 +57,16 @@ public class BoardController {
 		return new Gson().toJson(resultMap); 
 	}
 	
+	@RequestMapping(value = "/board/edit.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String edit2(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = boardService.editBoard(map);
+		
+		return new Gson().toJson(resultMap); 
+	}
+	
 	@RequestMapping(value = "/board/view.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String view2(Model model, @RequestParam HashMap<String, Object> map) throws Exception {

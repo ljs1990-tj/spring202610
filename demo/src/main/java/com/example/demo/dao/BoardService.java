@@ -99,4 +99,17 @@ public class BoardService {
 		return resultMap;
 	}
 	
+	public HashMap<String, Object> editBoard(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap();
+		try {
+			int cnt = boardMapper.updateBoard(map);
+			resultMap.put("result", "success");
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultMap.put("result", "fail");
+			System.out.println(e.getMessage());
+		}
+		return resultMap;
+	}
+	
 }
