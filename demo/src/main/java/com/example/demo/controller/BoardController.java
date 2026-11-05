@@ -33,12 +33,46 @@ public class BoardController {
 		return "/board/add";
 	}
 	
+	@RequestMapping("/board/view.do")
+	public String view(Model model, @RequestParam HashMap<String, Object> map) throws Exception{
+		
+		model.addAttribute("boardNo", map.get("boardNo"));
+		return "/board/view";
+	}
+	
+	@RequestMapping("/board/edit.do")
+	public String edit(Model model, @RequestParam HashMap<String, Object> map) throws Exception{
+		
+		model.addAttribute("boardNo", map.get("boardNo"));
+		return "/board/edit";
+	}
+	
 	@RequestMapping(value = "/board/list.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String login(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
 		resultMap = boardService.getBoardList(map);
+		
+		return new Gson().toJson(resultMap); 
+	}
+	
+	@RequestMapping(value = "/board/view.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String view2(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = boardService.getBoard(map);
+		
+		return new Gson().toJson(resultMap); 
+	}
+	
+	@RequestMapping(value = "/board/add.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String add(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = boardService.addBoard(map);
 		
 		return new Gson().toJson(resultMap); 
 	}

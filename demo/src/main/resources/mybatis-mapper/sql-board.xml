@@ -17,6 +17,12 @@
 		WHERE TITLE LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 	
+	<select id="selectBoard" parameterType="hashmap" resultType="com.example.demo.model.Board">
+		SELECT *
+		FROM TBL_BOARD 
+		WHERE BOARDNO = #{boardNo}
+	</select>
+	
 	<delete id="deleteBoard" parameterType="hashmap">
 		DELETE FROM TBL_BOARD WHERE BOARDNO = #{boardNo}
 	</delete>

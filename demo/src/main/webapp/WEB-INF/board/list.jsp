@@ -85,7 +85,9 @@
                     <!-- <td><input type="radio" name="board" :value="item.boardNo" v-model="selectItem"></td> -->
                     <td><input @change="fnSelect" type="checkbox" name="board" :value="item.boardNo" v-model="selectItemList"></td>
                     <td>{{item.boardNo}}</td>
-                    <td>{{item.title}}</td>
+                    <td>
+                        <a href="javascript:;" @click="fnView(item.boardNo)">{{item.title}}</a>
+                    </td>
                     <td>{{item.userId}}</td>
                     <td>{{item.cnt}}</td>
                     <td>{{item.cDateTime}}</td>
@@ -212,6 +214,10 @@
             fnSelect : function(){
                 let self = this;
                 self.checked = self.list.length == self.selectItemList.length;
+            },
+            fnView : function (boardNo){
+                let self = this;
+                pageChange("view.do", {boardNo : boardNo});
             }
         }, // methods
         mounted() {

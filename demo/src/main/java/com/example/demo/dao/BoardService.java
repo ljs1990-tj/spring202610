@@ -39,6 +39,21 @@ public class BoardService {
 		return resultMap;
 	}
 	
+	public HashMap<String, Object> getBoard(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap();
+		try {
+			
+			Board info = boardMapper.selectBoard(map);
+			resultMap.put("info", info);
+			resultMap.put("result", "success");
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultMap.put("result", "fail");
+			System.out.println(e.getMessage());
+		}
+		return resultMap;
+	}
+	
 	public HashMap<String, Object> removeBoard(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap();
 		try {
@@ -73,12 +88,12 @@ public class BoardService {
 		HashMap<String, Object> resultMap = new HashMap();
 		try {
 			int cnt = boardMapper.insertBoard(map);
-			resultMap.put("message", Message.DELETE_SUCCESS);
+			resultMap.put("message", Message.INSERT_SUCCESS);
 			resultMap.put("result", "success");
 		} catch (Exception e) {
 			// TODO: handle exception
 			resultMap.put("result", "fail");
-			resultMap.put("message", Message.DELETE_FAIL);
+			resultMap.put("message", Message.INSERT_FAIL);
 			System.out.println(e.getMessage());
 		}
 		return resultMap;
