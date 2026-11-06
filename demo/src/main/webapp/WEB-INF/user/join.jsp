@@ -44,6 +44,12 @@
             <button @click="fnAddr">주소검색</button>
         </div>
         <div>
+            본인인증 : 
+            <span v-if="authFlg == 1"><button @click="fnAuth">문자전송</button></span>
+            <span v-else-if="authFlg == 2"><input v-model="inputNumber" :placeholder="timer"><button @click="fnNumberCheck">인증</button></span>
+            <span v-else>인증완료</span>
+        </div>
+        <div>
             <button @click="fnJoin">가입하기</button>
         </div>
     </div>
@@ -66,7 +72,14 @@
                 pwd1 : "",
                 pwd2 : "",
                 userName : "",
-                addr : ""
+                addr : "",
+                authNumber : "", // 서버가 보낸 랜덤한 숫자
+                inputNumber : "", // 내가 입력한 값(문자로 받은거)
+                authFlg : 1, // 1 : 최초, 2 : 문자 전송 후, 3 : 검증 끝난 후
+                timer : "",
+                intervalId : null,
+                count : 180,
+
             };
         },
         methods: {
@@ -119,12 +132,64 @@
                     type: "POST",
                     data: param,
                     success: function (data) {
-                        
+                        alert("가입 ㅊㅋ");
+                        location.href = "login.do";
                     }
                 });
             },
             fnAddr : function (){
                 window.open("addr.do", "addr", "width=500, height=500");
+            },
+            fnAuth : function(){
+                let self = this;
+                let param = {};
+                $.ajax({
+                    url: "http://localhost:8080/send-one",
+                    dataType: "json",
+                    type: "POST",
+                    data: param,
+                    success: function (data) {
+                        if(data.res.groupInfo.status == "SENDING"){
+                            alert("문자가 전송되었습니다.");
+                            self.authNumber = data.authNumber;
+                            self.authFlg = 2;
+                            self.intervalId = setInterval(self.fnTimer, 1000);
+                        } else {
+                            alert("에러가 발생했습니다.");
+                        }
+                    }
+                });
+            },
+            fnNumberCheck : function(){
+                let self = this;
+                if(self.authNumber == self.inputNumber){
+                    alert("인증되었습니다!");
+                    self.authFlg = 3;
+                    
+                } else {
+                    alert("인증번호를 다시 확인해주세요.");
+                }
+            },
+            fnTimer : function(){
+                let self = this;
+
+                if(self.count <= 0){
+                    alert("시간초과!");
+                    clearInterval(self.intervalId);
+                    self.timer = "시간초과";
+                    return;
+                }
+
+                let min = "";
+                let sec = "";
+                min = parseInt(self.count / 60);
+                sec = parseInt(self.count % 60);
+                
+                min = min < 10 ? "0" + min : min;
+                sec = sec < 10 ? "0" + sec : sec;
+
+                self.timer = min + ":" + sec
+                self.count--;
             }
         }, // methods
         mounted() {
