@@ -25,10 +25,19 @@
 		</choose>
 	</select>
 	
+	<select id="selectProduct" parameterType="hashmap" resultType="com.example.demo.model.Product">
+		SELECT *
+		FROM PRODUCT
+		WHERE PRODUCT_ID = #{productId}
+	</select>
+	
+	
 	<select id="selectCategoryList" parameterType="hashmap" resultType="com.example.demo.model.Product">
 		SELECT DISTINCT CATEGORY
 		FROM PRODUCT
 	</select>
+	
+	
 	
 </mapper>
 

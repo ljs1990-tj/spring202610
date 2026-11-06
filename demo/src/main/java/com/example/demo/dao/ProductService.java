@@ -32,5 +32,20 @@ public class ProductService {
 		return resultMap;
 	}
 	
+	public HashMap<String, Object> getProduct(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap();
+		try {
+			
+			Product info = productMapper.selectProduct(map);
+			
+			resultMap.put("info", info);
+			resultMap.put("result", "success");
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultMap.put("result", "fail");
+			System.out.println(e.getMessage());
+		}
+		return resultMap;
+	}
 	
 }

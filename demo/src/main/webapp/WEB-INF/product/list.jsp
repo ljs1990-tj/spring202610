@@ -69,9 +69,12 @@
                     <option v-for="item in categoryList" :value="item.category">{{item.category}}</option>
                 </select>
                 |
-                <label><input @change="fnList" type="radio" v-model="order" value="1">낮은가격순</label>
+                <label v-for="item in orderList">
+                    <input @change="fnList" type="radio" v-model="order" :value="item.key">{{item.name}}
+                </label>
+                <!-- <label><input @change="fnList" type="radio" v-model="order" value="1">낮은가격순</label>
                 <label><input @change="fnList" type="radio" v-model="order" value="2">높은가격순</label>
-                <label><input @change="fnList" type="radio" v-model="order" value="3">등록순</label>
+                <label><input @change="fnList" type="radio" v-model="order" value="3">등록순</label> -->
             </div>
             <table>
                 <tr>
@@ -84,7 +87,9 @@
                 </tr>
                 <tr v-for="item in list">
                     <td>{{item.productId}}</td>
-                    <td>{{item.productName}}</td>
+                    <td>
+                        <a href="javascript:;" @click="fnView(item.productId)">{{item.productName}}</a>
+                    </td>
                     <td>{{item.brand}}</td>
                     <td>{{item.category}}</td>
                     <td>{{item.price}}</td>
@@ -104,7 +109,12 @@
                 list : [],
                 categoryList : [],
                 order : 0,
-                category : ""
+                category : "",
+                orderList : [
+                    { key : 1, name : "낮은가격순"},
+                    { key : 2, name : "높은가격순"},
+                    { key : 3, name : "등록순"}
+                ]
             };
         },
         methods: {
@@ -126,6 +136,10 @@
                         self.categoryList = data.categoryList;
                     }
                 });
+            },
+            fnView : function(productId){
+                pageChange("view.do", {productId : productId});
+
             }
         }, // methods
         mounted() {
