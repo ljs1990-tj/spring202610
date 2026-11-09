@@ -6,12 +6,12 @@
 	<select	id="selectUser" parameterType="hashmap" resultType="com.example.demo.model.User">
 		SELECT *
 		FROM TBL_USER 
-		WHERE USER_ID = #{userId} AND PWD = #{pwd}
+		WHERE USER_ID = #{userId}
 	</select>
 	
 	<insert id="insertUser" parameterType="hashmap">
 		INSERT INTO TBL_USER
-		VALUES(#{userId}, #{pwd}, #{userName}, #{addr}, 'C')
+		VALUES(#{userId}, #{hashPwd}, #{userName}, #{addr}, 'C')
 	</insert>
 	
 	

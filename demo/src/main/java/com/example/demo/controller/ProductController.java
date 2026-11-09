@@ -24,6 +24,12 @@ public class ProductController {
 		return "/product/list";
 	}
 	
+	@RequestMapping("/product/add.do")
+	public String add(Model model) throws Exception{
+		
+		return "/product/add";
+	}
+	
 	@RequestMapping("/product/view.do")
 	public String view(Model model, @RequestParam HashMap<String, Object> map ) throws Exception{
 		model.addAttribute("productId", map.get("productId"));

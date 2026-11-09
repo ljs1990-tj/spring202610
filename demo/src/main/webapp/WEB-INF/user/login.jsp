@@ -66,7 +66,7 @@
                     success: function (data) {
                         alert(data.message);
                         if(data.loginFlg){
-                            location.href="/professor/list.do";
+                            location.href = data.url;
                         } 
                     }
                 });

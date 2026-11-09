@@ -89,7 +89,7 @@
                 <tr>
                     <th>첨부파일</th>
                     <td>
-                        <input type="file" id="file1" name="file1">
+                        <input type="file" id="file1" name="file1" accept=".jpg, .png">
                     </td>
                 </tr>
                 <tr>
@@ -100,7 +100,7 @@
                 </tr>
             </table>
             <div class="btn-area">
-                <button @click="fnFileAdd">등록</button>
+                <button @click="fnAdd">등록</button>
                 <button>되돌아가기</button>
             </div>
         </div>
@@ -115,7 +115,8 @@
                 // 변수 - (key : value)
                 kind : "1",
                 title : "",
-                contents : ""
+                contents : "",
+                sessionId : "${sessionId}"
             };
         },
         methods: {
@@ -133,30 +134,35 @@
                     type: "POST",
                     data: param,
                     success: function (data) {
-                        alert(data.message);
-                        location.href="list.do";
+                        if($("#file1")[0].files[0] != undefined){
+                            self.fnFileAdd(data.boardNo);
+                        } else {
+                            alert(data.message);
+                            location.href="list.do";
+                        }
                     }
                 });
             },
-            fnFileAdd : function(){
+            fnFileAdd : function(boardNo){
                 var self = this;
                 console.log($("#file1")[0].files[0]);
                 var form = new FormData();
                 form.append( "file1",  $("#file1")[0].files[0] );
-                form.append( "idx",  1234); // 임시 fk
+                form.append( "idx",  boardNo); 
                 self.upload(form);  
             }, 
             upload : function(form){
                 var self = this;
                 console.log(form);
                 $.ajax({
-                    url : "/fileUpload.dox"
+                    url : "/board/fileUpload.dox"
                     , type : "POST"
                     , processData : false
                     , contentType : false
                     , data : form
-                    , success : function(response) { 
-                        
+                    , success : function(data) { 
+                        alert("등록되었습니다.");
+                        location.href="list.do";
                     }	           
                 });
             }

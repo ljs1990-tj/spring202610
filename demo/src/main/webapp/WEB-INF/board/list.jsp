@@ -60,6 +60,7 @@
 <body>
     <div id="app">
         <!-- html 코드는 id가 app인 태그 안에서 작업 -->
+        <div>{{sessionName}}님 환영합니다.</div>
         <div class="table">
             <div class="search">
                 검색어 : <input @keyup.enter="fnList" v-model="keyword" placeholder="검색어를 입력해주세요.">
@@ -113,6 +114,10 @@
         data() {
             return {
                 // 변수 - (key : value)
+                sessionId : "${sessionId}",
+                sessionName : "${sessionName}",
+                sessionRole : "${sessionRole}",
+
                 list : [],
                 selectItem : "", // 라디오 버튼으로 삭제 할 때
                 selectItemList : [], // 체크박스로 삭제할 때

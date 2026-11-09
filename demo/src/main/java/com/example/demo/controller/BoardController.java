@@ -118,7 +118,8 @@ public class BoardController {
 		return new Gson().toJson(resultMap); 
 	}
 	
-	@RequestMapping("/fileUpload.dox")
+	@RequestMapping("/board/fileUpload.dox")
+	@ResponseBody
 	public String result(@RequestParam("file1") MultipartFile multi, @RequestParam("idx") int idx, HttpServletRequest request,HttpServletResponse response, Model model)
 	{
 		String url = null;
