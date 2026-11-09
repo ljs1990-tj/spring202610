@@ -28,6 +28,9 @@
     <div id="app">
         <!-- html 코드는 id가 app인 태그 안에서 작업 -->
         {{info}}
+        <div>
+            <button>제품 삭제</button>
+        </div>
     </div>
 </body>
 </html>

@@ -29,6 +29,9 @@ public interface BoardMapper {
 	
 	// 게시글 수정
 	int updateBoard(HashMap<String, Object> map);
+	
+	// 파일 업로드
+	int insertBoardFile(HashMap<String, Object> map);
 }
 
 

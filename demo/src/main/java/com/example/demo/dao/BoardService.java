@@ -99,6 +99,21 @@ public class BoardService {
 		return resultMap;
 	}
 	
+	public HashMap<String, Object> addBoardFile(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap();
+		try {
+			int cnt = boardMapper.insertBoardFile(map);
+			resultMap.put("message", Message.INSERT_SUCCESS);
+			resultMap.put("result", "success");
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultMap.put("result", "fail");
+			resultMap.put("message", Message.INSERT_FAIL);
+			System.out.println(e.getMessage());
+		}
+		return resultMap;
+	}
+	
 	public HashMap<String, Object> editBoard(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap();
 		try {

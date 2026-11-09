@@ -89,7 +89,7 @@
                 <tr>
                     <th>첨부파일</th>
                     <td>
-                        <input type="file">
+                        <input type="file" id="file1" name="file1">
                     </td>
                 </tr>
                 <tr>
@@ -100,7 +100,7 @@
                 </tr>
             </table>
             <div class="btn-area">
-                <button @click="fnAdd">등록</button>
+                <button @click="fnFileAdd">등록</button>
                 <button>되돌아가기</button>
             </div>
         </div>
@@ -136,6 +136,28 @@
                         alert(data.message);
                         location.href="list.do";
                     }
+                });
+            },
+            fnFileAdd : function(){
+                var self = this;
+                console.log($("#file1")[0].files[0]);
+                var form = new FormData();
+                form.append( "file1",  $("#file1")[0].files[0] );
+                form.append( "idx",  1234); // 임시 fk
+                self.upload(form);  
+            }, 
+            upload : function(form){
+                var self = this;
+                console.log(form);
+                $.ajax({
+                    url : "/fileUpload.dox"
+                    , type : "POST"
+                    , processData : false
+                    , contentType : false
+                    , data : form
+                    , success : function(response) { 
+                        
+                    }	           
                 });
             }
         }, // methods

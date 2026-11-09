@@ -49,6 +49,12 @@
 			UDATETIME = NOW()
 		WHERE BOARDNO = #{boardNo}
 	</update>
+	
+	<insert id="insertBoardFile" parameterType="hashmap">
+		INSERT INTO TBL_BOARD_FILE
+		VALUES(NULL, #{idx}, #{path}, #{fileName}, #{orgName}, #{size}, #{extName})
+	</insert>
+	
 </mapper>
 
 

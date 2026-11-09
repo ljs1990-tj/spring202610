@@ -11,5 +11,6 @@ public class Product {
 	private String stockQty;
 	private String description;
 	private String releaseDate;
+	private int convertPrice;
 	
 }

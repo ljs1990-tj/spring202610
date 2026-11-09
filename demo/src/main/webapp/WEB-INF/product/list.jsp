@@ -92,11 +92,12 @@
                     </td>
                     <td>{{item.brand}}</td>
                     <td>{{item.category}}</td>
-                    <td>{{item.price}}</td>
+                    <td>₩{{item.convertPrice}}</td>
                     <td>{{item.releaseDate}}</td>
                 </tr>
             </table>
         </div>
+        
     </div>
 </body>
 </html>

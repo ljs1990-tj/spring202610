@@ -4,7 +4,8 @@
 
 <mapper namespace="com.example.demo.mapper.ProductMapper">
 	<select id="selectProductList" parameterType="hashmap" resultType="com.example.demo.model.Product">
-		SELECT *
+		SELECT 
+			*, ROUND(PRICE) AS CONVERT_PRICE
 		FROM PRODUCT WHERE 1=1
 		<if test="category != null and category != ''">
 			AND CATEGORY = #{category}
@@ -26,7 +27,7 @@
 	</select>
 	
 	<select id="selectProduct" parameterType="hashmap" resultType="com.example.demo.model.Product">
-		SELECT *
+		SELECT *, ROUND(PRICE) AS CONVERT_PRICE
 		FROM PRODUCT
 		WHERE PRODUCT_ID = #{productId}
 	</select>
