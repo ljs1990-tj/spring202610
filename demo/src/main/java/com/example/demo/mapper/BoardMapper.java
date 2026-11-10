@@ -16,6 +16,9 @@ public interface BoardMapper {
 	// 게시글 상세정보
 	Board selectBoard(HashMap<String, Object> map);
 	
+	// 댓글 목록
+	List<Board> selectBoardCommentList(HashMap<String, Object> map);
+	
 	// 게시글 갯수
 	int selectBoardCount(HashMap<String, Object> map);
 	
@@ -36,6 +39,9 @@ public interface BoardMapper {
 	
 	// 첨부파일 목록
 	List<File> selectBoardFile(HashMap<String, Object> map);
+	
+	// 댓글 등록
+	int insertBoardComment(HashMap<String, Object> map);
 }
 
 

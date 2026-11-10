@@ -11,4 +11,7 @@ public class Board {
 	private String uDateTime;
 	
 	private String userName;
+	private String commentNo;
+	
+	
 }

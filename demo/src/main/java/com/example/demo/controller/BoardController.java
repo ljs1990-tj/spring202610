@@ -103,6 +103,16 @@ public class BoardController {
 		return new Gson().toJson(resultMap); 
 	}
 	
+	@RequestMapping(value = "/board/add-comment.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String addComment(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = boardService.addBoardComment(map);
+		
+		return new Gson().toJson(resultMap); 
+	}
+	
 	@RequestMapping(value = "/board/remove-all.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String removeAll(Model model, @RequestParam HashMap<String, Object> map) throws Exception {

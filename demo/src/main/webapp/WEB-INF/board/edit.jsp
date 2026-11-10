@@ -124,7 +124,8 @@
             fnInfo : function () {
                 let self = this;
                 let param = {
-                    boardNo : self.boardNo
+                    boardNo : self.boardNo,
+                    option : "EDIT"
                 };
                 $.ajax({
                     url: "view.dox",
@@ -132,6 +133,7 @@
                     type: "POST",
                     data: param,
                     success: function (data) {
+                        console.log(data);
                         self.kind = data.info.kind;
                         self.title = data.info.title;
                         self.contents = data.info.contents;

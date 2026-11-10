@@ -29,11 +29,24 @@
         <!-- html 코드는 id가 app인 태그 안에서 작업 -->
         <div>
             <h3>제목 : {{info.title}}</h3>
-            <h3>작성자 : {{info.userId}} | 조회수 : {{info.cnt}}</h3>
+            <h3>작성자 : {{info.userName}} | 조회수 : {{info.cnt}}</h3>
             <hr>
             <h4>내용</h4>
             <img v-for="item in fileList" :src="item.filePath">
             <div v-html="info.contents"></div>
+        </div>
+        <hr>
+        <div>
+            <h3>댓글 목록</h3>
+            <div v-for="item in commentList">
+                <span><strong>{{item.userName}} : </strong></span>
+                <span>{{item.contents}}</span>
+            </div>
+            <br>
+            <div>
+                댓글작성 : <input @keyup.enter="fnAddComment" v-model="comment" style="width : 300px;">
+                <button @click="fnAddComment">등록</button>
+            </div>
         </div>
         <hr>
         <div v-if="sessionId == info.userId || sessionRole == 'A' ">
@@ -41,6 +54,7 @@
             <button @click="fnRemove">삭제</button>
         </div>
     </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>
 
@@ -55,7 +69,9 @@
 
                 boardNo : "${boardNo}",
                 info : {},
-                fileList : []
+                fileList : [],
+                commentList : [],
+                comment : ""
             };
         },
         methods: {
@@ -63,7 +79,8 @@
             fnInfo : function () {
                 let self = this;
                 let param = {
-                    boardNo : self.boardNo
+                    boardNo : self.boardNo,
+                    option : "VIEW"
                 };
                 $.ajax({
                     url: "view.dox",
@@ -74,6 +91,7 @@
                         console.log(data);
                         self.info = data.info;
                         self.fileList = data.fileList;
+                        self.commentList = data.commentList;
                     }
                 });
             },
@@ -95,6 +113,27 @@
                         alert(data.message);
                         if(data.result == "success"){
                             location.href = "list.do";
+                        }
+                        
+                    }
+                });
+            },
+            fnAddComment : function () {
+                let self = this;
+                let param = {
+                    boardNo : self.boardNo,
+                    contents : self.comment
+                };
+                $.ajax({
+                    url: "add-comment.dox",
+                    dataType: "json",
+                    type: "POST",
+                    data: param,
+                    success: function (data) {
+                        alert(data.message);
+                        if(data.result == "success"){
+                            self.fnInfo();
+                            self.comment = "";
                         }
                         
                     }

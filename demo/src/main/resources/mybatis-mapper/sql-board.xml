@@ -20,7 +20,15 @@
 	
 	<select id="selectBoard" parameterType="hashmap" resultType="com.example.demo.model.Board">
 		SELECT *
-		FROM TBL_BOARD 
+		FROM TBL_BOARD B
+		INNER JOIN TBL_USER U ON U.USER_ID = B.USERID
+		WHERE BOARDNO = #{boardNo}
+	</select>
+	
+	<select id="selectBoardCommentList" parameterType="hashmap" resultType="com.example.demo.model.Board">
+		SELECT *
+		FROM TBL_BOARD_COMMENT C
+		INNER JOIN TBL_USER U ON C.USERID = U.USER_ID
 		WHERE BOARDNO = #{boardNo}
 	</select>
 	
@@ -65,6 +73,11 @@
 	<insert id="insertBoardFile" parameterType="hashmap">
 		INSERT INTO TBL_BOARD_FILE
 		VALUES(NULL, #{idx}, #{path}, #{fileName}, #{orgName}, #{size}, #{extName})
+	</insert>
+	
+	<insert id="insertBoardComment" parameterType="hashmap">
+		INSERT INTO TBL_BOARD_COMMENT
+		VALUES(NULL, #{boardNo}, NULL, #{contents}, #{sessionId}, NOW(), NULL)
 	</insert>
 	
 </mapper>
