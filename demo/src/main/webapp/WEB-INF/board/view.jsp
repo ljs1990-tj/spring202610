@@ -36,8 +36,9 @@
             <div v-html="info.contents"></div>
         </div>
         <hr>
-        <div>
+        <div v-if="sessionId == info.userId || sessionRole == 'A' ">
             <button @click="fnView">수정</button>
+            <button @click="fnRemove">삭제</button>
         </div>
     </div>
 </body>
@@ -48,6 +49,10 @@
         data() {
             return {
                 // 변수 - (key : value)
+                sessionId : "${sessionId}",
+                sessionName : "${sessionName}",
+                sessionRole : "${sessionRole}",
+
                 boardNo : "${boardNo}",
                 info : {},
                 fileList : []
@@ -75,6 +80,25 @@
             fnView : function(){
                 let self = this;
                 pageChange("edit.do", {boardNo : self.boardNo});
+            },
+            fnRemove : function () {
+                let self = this;
+                let param = {
+                    boardNo : self.boardNo
+                };
+                $.ajax({
+                    url: "remove.dox",
+                    dataType: "json",
+                    type: "POST",
+                    data: param,
+                    success: function (data) {
+                        alert(data.message);
+                        if(data.result == "success"){
+                            location.href = "list.do";
+                        }
+                        
+                    }
+                });
             }
         }, // methods
         mounted() {

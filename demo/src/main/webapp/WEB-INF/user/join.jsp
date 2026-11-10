@@ -101,10 +101,10 @@
                 }
 
                 // 3. 비밀번호는 최소 8글자
-                if(self.pwd1.length < 8 || self.pwd2.length < 8){
+                /* if(self.pwd1.length < 8 || self.pwd2.length < 8){
                     alert("비밀번호는 최소 8글자 입니다.");
                     return;
-                }
+                } */
                 // 4. 비밀번호는 특수문자 필수 포함
 
                 // 5. 비밀번호와 비밀번호 확인은 같아야 함.

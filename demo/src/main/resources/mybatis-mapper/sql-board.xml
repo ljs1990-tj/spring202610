@@ -6,7 +6,8 @@
 
 	<select id="selectBoardList" parameterType="hashmap" resultType="com.example.demo.model.Board">
 		SELECT *
-		FROM TBL_BOARD 
+		FROM TBL_BOARD B
+		INNER JOIN TBL_USER U ON B.USERID = U.USER_ID
 		WHERE TITLE LIKE CONCAT('%', #{keyword}, '%')
 		LIMIT #{limit} OFFSET #{offset}
 	</select>
@@ -49,7 +50,7 @@
 	>
 		INSERT INTO TBL_BOARD
 		VALUES(NULL, #{title}, #{contents}, #{sessionId}, 0, #{kind}, NOW(), NOW())
-		<!-- userId는 잠깐 하드코딩. 아직 세션 안해서 -->
+		
 	</insert>
 	
 	<update id="updateBoard" parameterType="hashmap">

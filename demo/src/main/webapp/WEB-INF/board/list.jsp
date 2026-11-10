@@ -75,21 +75,21 @@
             <table>
                 <tr>
                     <!-- <th>선택  </th> -->
-                    <th><input type="checkbox" @click="fnSelectItem" value="true" v-model="checked"></th> 
+                    <th v-if="sessionRole == 'A'"><input type="checkbox" @click="fnSelectItem" value="true" v-model="checked"></th> 
                     <th>번호  </th>
                     <th>제목  </th>
-                    <th>아이디</th>
+                    <th>작성자</th>
                     <th>조회수</th>
                     <th>작성일</th>
                 </tr>
                 <tr v-for="item in list">
                     <!-- <td><input type="radio" name="board" :value="item.boardNo" v-model="selectItem"></td> -->
-                    <td><input @change="fnSelect" type="checkbox" name="board" :value="item.boardNo" v-model="selectItemList"></td>
+                    <td v-if="sessionRole == 'A'"><input @change="fnSelect" type="checkbox" name="board" :value="item.boardNo" v-model="selectItemList"></td>
                     <td>{{item.boardNo}}</td>
                     <td>
                         <a href="javascript:;" @click="fnView(item.boardNo)">{{item.title}}</a>
                     </td>
-                    <td>{{item.userId}}</td>
+                    <td>{{item.userName}}</td>
                     <td>{{item.cnt}}</td>
                     <td>{{item.cDateTime}}</td>
                 </tr>
@@ -103,7 +103,7 @@
         <div>
             <!-- <button @click="fnRemove">삭제</button> -->
             <a href="add.do"><button>글쓰기</button></a>
-            <button @click="fnRemoveAll">삭제</button>
+            <button v-if="sessionRole == 'A'" @click="fnRemoveAll">삭제</button>
         </div>
     </div>
 </body>
