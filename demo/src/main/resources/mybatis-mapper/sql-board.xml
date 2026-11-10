@@ -80,6 +80,12 @@
 		VALUES(NULL, #{boardNo}, NULL, #{contents}, #{sessionId}, NOW(), NULL)
 	</insert>
 	
+	<update id="updateBoardComment" parameterType="hashmap">
+		UPDATE TBL_BOARD_COMMENT SET
+			CONTENTS = #{contents}
+		WHERE COMMENTNO = #{commentNo}
+	</update>
+	
 </mapper>
 
 

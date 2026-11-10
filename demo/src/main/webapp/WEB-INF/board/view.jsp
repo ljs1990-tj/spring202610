@@ -38,9 +38,12 @@
         <hr>
         <div>
             <h3>댓글 목록</h3>
-            <div v-for="item in commentList">
+            <div v-for="(item, index) in commentList">
                 <span><strong>{{item.userName}} : </strong></span>
-                <span>{{item.contents}}</span>
+                <span v-if="index != editIndex">{{item.contents}}</span>
+                <span v-else><input v-model="editComment"></span>
+                <button v-if="sessionId == item.userId" @click="fnEditComment(index)">수정</button>
+                
             </div>
             <br>
             <div>
@@ -71,7 +74,10 @@
                 info : {},
                 fileList : [],
                 commentList : [],
-                comment : ""
+                comment : "",
+
+                editComment : "",
+                editIndex : -1
             };
         },
         methods: {
@@ -138,6 +144,34 @@
                         
                     }
                 });
+            },
+            fnEditComment : function(index){
+                let self = this;
+                if(index != self.editIndex){
+                    self.editIndex = index;
+                    self.editComment = self.commentList[index].contents;
+                    return;
+                }
+
+                let param = {
+                    contents : self.editComment,
+                    commentNo : self.commentList[index].commentNo
+                };
+                $.ajax({
+                    url: "edit-comment.dox",
+                    dataType: "json",
+                    type: "POST",
+                    data: param,
+                    success: function (data) {
+                        alert(data.message);
+                        if(data.result == "success"){
+                            self.fnInfo();
+                            self.editIndex = -1;
+                        }
+                        
+                    }
+                });
+                
             }
         }, // methods
         mounted() {
