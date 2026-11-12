@@ -114,6 +114,8 @@
         data() {
             return {
                 // 변수 - (key : value)
+                code : "", // 카카오 로그인 코드
+
                 sessionId : "${sessionId}",
                 sessionName : "${sessionName}",
                 sessionRole : "${sessionRole}",
@@ -223,11 +225,31 @@
             fnView : function (boardNo){
                 let self = this;
                 pageChange("view.do", {boardNo : boardNo});
+            },
+            fnKakao : function() {
+                var self = this;
+                var nparmap = {
+                    code : self.code
+                };
+                $.ajax({
+                    url: "/kakao.dox",
+                    dataType: "json",
+                    type: "POST",
+                    data: nparmap,
+                    success: function (data) {
+                        console.log(data);
+                    
+                        
+                    }
+                });
             }
         }, // methods
         mounted() {
             // 처음 시작할 때 실행되는 부분
             let self = this;
+            const queryParams = new URLSearchParams(window.location.search);
+            self.code = queryParams.get('code') || ''; 
+            self.fnKakao();
             self.fnList();
         }
     });

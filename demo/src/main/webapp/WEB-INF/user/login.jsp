@@ -36,6 +36,9 @@
         <div>
             <button @click="fnLogin">로그인</button>
             <button>회원가입</button>
+            <a :href="location">
+                <img src="/img/kakao.png">
+            </a>
         </div>
     </div>
 </body>
@@ -47,7 +50,8 @@
             return {
                 // 변수 - (key : value)
                 userId : "",
-                pwd : ""
+                pwd : "",
+                location : "${location}"
             };
         },
         methods: {
