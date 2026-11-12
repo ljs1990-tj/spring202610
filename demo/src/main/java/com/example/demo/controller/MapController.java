@@ -19,4 +19,10 @@ public class MapController {
 		return "/map/map2";
 	}
 	
+	@RequestMapping("/map3.do")
+	public String map3(Model model) throws Exception{
+		
+		return "/map/map3";
+	}
+	
 }
