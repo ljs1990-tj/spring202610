@@ -86,6 +86,11 @@
 		WHERE COMMENTNO = #{commentNo}
 	</update>
 	
+	<delete id="deleteBoardComment" parameterType="hashmap">
+		DELETE FROM TBL_BOARD_COMMENT 
+		WHERE COMMENTNO = #{commentNo}
+	</delete>
+	
 </mapper>
 
 

@@ -45,6 +45,9 @@ public interface BoardMapper {
 	
 	// 댓글 수정
 	int updateBoardComment(HashMap<String, Object> map);
+	
+	// 댓글 삭제
+	int deleteBoardComment(HashMap<String, Object> map);
 }
 
 

@@ -43,7 +43,7 @@
                 <span v-if="index != editIndex">{{item.contents}}</span>
                 <span v-else><input v-model="editComment"></span>
                 <button v-if="sessionId == item.userId" @click="fnEditComment(index)">수정</button>
-                
+                <button v-if="sessionId == item.userId && index != editIndex" @click="fnRemoveComment(item.commentNo)">삭제</button>
             </div>
             <br>
             <div>
@@ -172,6 +172,28 @@
                     }
                 });
                 
+            },
+            fnRemoveComment : function(commentNo){
+                let self = this;
+                let param = {
+                    commentNo : commentNo
+                };
+                if(!confirm("정말 댓글 삭제?")){
+                    return;
+                }
+                $.ajax({
+                    url: "remove-comment.dox",
+                    dataType: "json",
+                    type: "POST",
+                    data: param,
+                    success: function (data) {
+                        alert(data.message);
+                        if(data.result == "success"){
+                            self.fnInfo();
+                        }
+                        
+                    }
+                });
             }
         }, // methods
         mounted() {
