@@ -249,7 +249,9 @@
             let self = this;
             const queryParams = new URLSearchParams(window.location.search);
             self.code = queryParams.get('code') || ''; 
-            self.fnKakao();
+            
+            self.fnKakao(); // self.code값이 있을 때만 실행
+                            // 소셜로그인해야만 code값이 생길테니
             self.fnList();
         }
     });

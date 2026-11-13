@@ -56,5 +56,13 @@ public class ProductController {
 		return new Gson().toJson(resultMap); 
 	}
 	
-	
+	@RequestMapping(value = "/product/add-order.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String order(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = productService.addProductOrder(map);
+		
+		return new Gson().toJson(resultMap); 
+	}
 }

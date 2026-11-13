@@ -38,6 +38,11 @@
 		FROM PRODUCT
 	</select>
 	
+	<insert id="insertProductOrder" parameterType="hashmap">
+		INSERT INTO PRODUCT_ORDERS
+		VALUES(NULL, #{sessionId}, #{productId}, 1, #{price}, 'ORDERED', NOW(), '인천', 'DONE', #{merchantUid})
+	</insert>
+	
 	
 	
 </mapper>

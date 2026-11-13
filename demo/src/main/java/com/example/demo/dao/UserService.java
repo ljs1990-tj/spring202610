@@ -90,4 +90,48 @@ public class UserService {
 		return resultMap;
 	}
 	
+	public HashMap<String, Object> editPassword(HashMap<String, Object> map){
+		HashMap<String, Object> resultMap = new HashMap();
+		
+		try {
+			String hashPwd = passwordEncoder.encode((String) map.get("pwd"));
+			System.out.println("해시 전 패스워드 => " + map.get("pwd"));
+			System.out.println("해시 후 패스워드 => " + hashPwd);
+			
+			map.put("hashPwd", hashPwd);
+			int result = userMapper.updatePassword(map);	
+			resultMap.put("result", "success");
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultMap.put("result", "fail");
+			resultMap.put("message", Message.DB_ERR);
+			System.out.println(e.getMessage());
+		}
+		
+		return resultMap;
+	}
+	
+	public HashMap<String, Object> getUserAuth(HashMap<String, Object> map){
+		HashMap<String, Object> resultMap = new HashMap();
+		
+		try {
+			int result = userMapper.selectUserAuth(map);
+			if(result > 0) {
+				resultMap.put("success", true);
+				resultMap.put("message", "인증되었습니다.");
+			} else {
+				resultMap.put("success", false);
+				resultMap.put("message", "인증에 실패했습니다. 아이디를 확인해주세요.");
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultMap.put("result", "fail");
+			resultMap.put("message", Message.DB_ERR);
+			System.out.println(e.getMessage());
+		}
+		
+		return resultMap;
+	}
+	
 }

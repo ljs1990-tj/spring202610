@@ -18,7 +18,8 @@ public interface ProductMapper {
 	// 카테고리 목록
 	List<Product> selectCategoryList(HashMap<String, Object> map);
 	
-	
+	// 결제 내용 추가
+	int insertProductOrder(HashMap<String, Object> map);
 	
 	
 }

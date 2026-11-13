@@ -40,6 +40,9 @@
                 <img src="/img/kakao.png">
             </a>
         </div>
+        <div>
+            <a href="/password.do"><button>비밀번호찾기</button></a>
+        </div>
     </div>
 </body>
 </html>
