@@ -11,6 +11,16 @@ public class ChartController {
 		
 		return "/chart/chart1";
 	}
+	@RequestMapping("/chart2.do")
+	public String chart2(Model model) throws Exception{
+		
+		return "/chart/chart2";
+	}
+	@RequestMapping("/chart3.do")
+	public String chart3(Model model) throws Exception{
+		
+		return "/chart/chart3";
+	}
 }
 
 
