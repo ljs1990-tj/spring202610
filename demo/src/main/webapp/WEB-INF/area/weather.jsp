@@ -36,9 +36,9 @@
                 구 : <option value="">:: 선택 ::</option>
                 <option :value="item.gu" v-for="item in guList">{{item.gu}}</option>
             </select>
-            <select v-model="dong">
+            <select v-model="dong" @change="fnGetWeather">
                 동 : <option value="">:: 선택 ::</option>
-                <option :value="item.dong" v-for="item in dongList">{{item.dong}}</option>
+                <option :value="item" v-for="item in dongList">{{item.dong}}</option>
             </select>
         </div>
         
@@ -56,7 +56,7 @@
                 dongList : [],
                 si : "",
                 gu : "",
-                dong : ""
+                dong : {}
             };
         },
         methods: {
@@ -121,14 +121,14 @@
             fnGetWeather : function () {
                 let self = this;
                 let param = {
-                    serviceKey : decodeURIComponent(""),
+                    serviceKey : decodeURIComponent("26Jt6WG3w3Ea4on0SOc67nMTWJlJ0CwWzH2XHxhuBHYzBkwABUcem88lB39hBrLvCcp7P%2BDMdLp0nBvkx9QUYQ%3D%3D"),
                     pageNo : 1,
                     numOfRows : 1000,
                     dataType : "JSON",
-                    base_date : "20261112",
-                    base_time : "1600",
-                    nx : 55,
-                    ny : 125
+                    base_date : "20261113",
+                    base_time : "0900",
+                    nx : self.dong.nx,
+                    ny : self.dong.ny
 
                 };
                 $.ajax({
@@ -138,6 +138,23 @@
                     data: param,
                     success: function (data) {
                         console.log(data);
+                        let items = data.response.body.items.item;
+                        for(let i=0; i<items.length; i++){
+                            let item = items[i];
+                            if(item.category == 'T1H'){
+                                // 기온에 대한 처리, 단위 : ℃
+                                console.log("기온 ==> ", item.obsrValue);
+                            }
+                            if(item.category == 'RN1'){
+                                // 강수에 대한 처리, 단위 : mm
+                                console.log("1시간 강수량 ==> ", item.obsrValue);
+                            }
+                            if(item.category == 'PTY'){
+                                // 강수량에 대한 처리
+                                // 없음(0), 비(1), 비/눈(2), 눈(3), 소나기(4), 빗방울(5), 빗방울눈날림(6), 눈날림(7) 
+                                console.log("강수형태 ==> ", item.obsrValue);
+                            }
+                        }
                     }
                 });
             }
@@ -146,7 +163,7 @@
             // 처음 시작할 때 실행되는 부분
             let self = this;
             self.fnSiList();
-            self.fnGetWeather();
+            // self.fnGetWeather();
         }
     });
 

@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="/js/page-change.js"></script>
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <style>
         table, tr, td, th{
             border : 1px solid black;
@@ -29,6 +30,7 @@
         <!-- html 코드는 id가 app인 태그 안에서 작업 -->
         {{info}}
         <div>
+            <button @click="fnPayment">구매하기</button>
             <button>제품 삭제</button>
         </div>
     </div>
@@ -36,6 +38,7 @@
 </html>
 
 <script>
+    IMP.init("");
     const app = Vue.createApp({
         data() {
             return {
